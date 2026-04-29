@@ -1,7 +1,7 @@
 ---
-// Lead-capture form. Currently a no-op submit (prevents default + shows
-// thank-you state). Wire `onSubmit` to a webhook (GHL, Zapier, etc.) when
-// ready — see the script block at the bottom.
+// Lead-capture form. Submits JSON to the LeadConnector (GHL) webhook and
+// redirects to /thank-you on success. UTM/gclid/fbclid + page_url are
+// forwarded automatically. See the script block at the bottom.
 
 interface Props {
   formId?: string;
@@ -117,24 +117,64 @@ const isDark = variant === "dark";
     By submitting, you agree to be contacted about your service request.
   </p>
 
-  <div class="thank-you hidden rounded-lg bg-emerald-50 p-4 text-center text-sm text-emerald-800 ring-1 ring-emerald-200">
-    Got it. We'll call you right back. Need it now? <a href="tel:+18133952324" class="font-bold underline">(813) 395-2324</a>
+  <!-- Success no longer rendered inline — the form redirects to /thank-you on success.
+       This box only appears on a network failure so users have a recovery path. -->
+  <div class="form-error hidden rounded-lg bg-red-50 p-4 text-center text-sm text-red-800 ring-1 ring-red-200">
+    Couldn't submit — please call <a href="tel:+18133952324" class="font-bold underline">(813) 395-2324</a> and we'll get you scheduled.
   </div>
 </form>
 
 <script define:vars={{ formId }}>
-  // TODO: replace this with a real webhook POST (GHL / Zapier / Cloudflare Worker).
-  // For now, we prevent default + show the thank-you state.
+  // POST to LeadConnector (GHL) webhook, then redirect to /thank-you.
+  // The webhook accepts JSON; we send the form fields plus any UTM params
+  // and the dynamic phone number from the DNI script (when present).
+  const WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/9z6AJkL0xkPy2TPVG0J3/webhook-trigger/b55c79f0-5a52-4a0e-be27-d5080429daa1";
+  const THANK_YOU_URL = "/thank-you";
+
   const form = document.getElementById(formId);
   if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const data = Object.fromEntries(new FormData(form));
-      console.log("[icac-lp] form submit", { formId, data });
       const submitBtn = form.querySelector("button[type=submit]");
-      const thankYou = form.querySelector(".thank-you");
-      if (submitBtn) submitBtn.setAttribute("disabled", "true");
-      if (thankYou) thankYou.classList.remove("hidden");
+      const errorBox = form.querySelector(".form-error");
+      if (errorBox) errorBox.classList.add("hidden");
+      if (submitBtn) {
+        submitBtn.setAttribute("disabled", "true");
+        submitBtn.dataset.original = submitBtn.textContent || "";
+        submitBtn.textContent = "Sending…";
+      }
+
+      const data = Object.fromEntries(new FormData(form));
+      // Pass UTMs through to GHL for attribution.
+      const params = new URLSearchParams(window.location.search);
+      ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","fbclid"].forEach((k) => {
+        const v = params.get(k);
+        if (v) data[k] = v;
+      });
+      data.page_url = window.location.href;
+      data.referrer = document.referrer || "";
+      data.form_id = formId;
+
+      try {
+        await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        // Notify GTM so call/lead conversions can fire.
+        try {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "lead_form_submit", form_id: formId });
+        } catch (_) { /* noop */ }
+        window.location.href = THANK_YOU_URL;
+      } catch (err) {
+        console.error("[icac-lp] form submit failed", err);
+        if (submitBtn) {
+          submitBtn.removeAttribute("disabled");
+          submitBtn.textContent = submitBtn.dataset.original || "Request My Callback";
+        }
+        if (errorBox) errorBox.classList.remove("hidden");
+      }
     });
   }
 </script>

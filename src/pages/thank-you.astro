@@ -1,0 +1,96 @@
+---
+import LandingLayout from "~/layouts/LandingLayout.astro";
+import Header from "~/components/sections/Header.astro";
+import Footer from "~/components/sections/Footer.astro";
+import Icon from "~/components/Icon.astro";
+import { icac, hero } from "~/data/icac";
+
+const title = "Thank You — I Care Air Care";
+const description = "Thanks for reaching out. We'll call you right back.";
+---
+
+<LandingLayout title={title} description={description}>
+  <Header />
+
+  <main class="relative isolate overflow-hidden bg-[var(--color-brand-darker)] text-white">
+    <!-- Shared background image / gradient -->
+    <div class="absolute inset-0 -z-10">
+      <img
+        src={hero.image}
+        alt=""
+        class="h-full w-full object-cover opacity-25"
+        width="1920"
+        height="1080"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0 bg-gradient-to-br from-[var(--color-brand-darker)] via-[var(--color-brand-dark)]/90 to-[var(--color-brand)]/40"></div>
+    </div>
+
+    <section class="mx-auto flex min-h-[70vh] max-w-3xl flex-col items-center justify-center px-4 py-20 text-center">
+      <span class="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg ring-4 ring-white/15">
+        <Icon name="check" class="h-8 w-8" />
+      </span>
+
+      <p class="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-accent)]">Got It</p>
+      <h1 class="mt-3 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+        Thanks — we'll be in touch shortly.
+      </h1>
+      <p class="mt-5 max-w-xl text-base text-white/85 sm:text-lg">
+        A member of the I Care Air Care team will call you back at the number you provided. Average callback during business hours is under 60 seconds.
+      </p>
+
+      <!-- Emergency CTA -->
+      <div class="mt-10 w-full max-w-lg rounded-2xl bg-white/10 p-6 ring-1 ring-white/20 backdrop-blur sm:p-8">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-accent)]">Need it now?</p>
+        <p class="mt-2 text-base text-white/85">
+          If this is a no-cool, no-heat, or any other emergency — give us a call directly and we'll get a tech to you as soon as possible.
+        </p>
+        <a
+          href={icac.phoneHref}
+          class="pop-btn pop-btn--primary mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-7 py-4 text-lg font-bold text-white shadow-lg sm:w-auto"
+        >
+          <Icon name="phone" class="h-5 w-5" />
+          Call {icac.phone}
+        </a>
+      </div>
+
+      <!-- Visit website -->
+      <div class="mt-10">
+        <p class="text-sm text-white/70">Want to learn more about us?</p>
+        <a
+          href="https://icareaircare.com/"
+          target="_blank"
+          rel="noopener"
+          class="pop-btn pop-btn--secondary mt-3 inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-base font-bold text-[var(--color-brand-darker)]"
+        >
+          <Icon name="home" class="h-4 w-4 text-[var(--color-brand)]" />
+          Visit icareaircare.com
+        </a>
+      </div>
+
+      <!-- Quick trust reassurance -->
+      <ul class="mt-12 grid grid-cols-2 gap-3 text-left sm:grid-cols-3">
+        {hero.trustChips.slice(0, 3).map((chip) => (
+          <li class="flex items-center gap-2 text-sm font-semibold text-white/85">
+            <span class="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white">
+              <Icon name="check" class="h-3 w-3" />
+            </span>
+            <span>{chip}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <Footer />
+  </main>
+</LandingLayout>
+
+<script>
+  // Notify GTM that a thank-you page view occurred (for conversion tracking).
+  try {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "lead_thank_you_view" });
+  } catch (_) { /* noop */ }
+</script>
