@@ -1,0 +1,42 @@
+---
+import { icac, howItWorks } from "~/data/icac";
+import Icon from "~/components/Icon.astro";
+---
+
+<section class="bg-white py-16 sm:py-20">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="text-center text-3xl font-extrabold tracking-tight text-[var(--color-brand-darker)] sm:text-4xl">
+      {howItWorks.headline}
+    </h2>
+
+    <ol class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+      {howItWorks.steps.map((step, i) => (
+        <li class="relative">
+          <div class="rounded-2xl border border-gray-200 bg-[var(--color-brand-lighter)] p-7 text-center">
+            <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-brand)] text-lg font-extrabold text-white shadow-md">
+              {step.number}
+            </div>
+            <h3 class="mt-5 text-xl font-bold text-[var(--color-brand-darker)]">{step.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-[var(--color-ink-soft)]">{step.description}</p>
+          </div>
+          {i < howItWorks.steps.length - 1 && (
+            <div class="pointer-events-none absolute left-full top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:block">
+              <span class="text-[var(--color-brand)]/30">›</span>
+            </div>
+          )}
+        </li>
+      ))}
+    </ol>
+
+    <div class="mt-12 text-center">
+      <p class="text-sm font-semibold text-[var(--color-brand-darker)]">Ready when you are.</p>
+      <a
+        href={icac.phoneHref}
+        class="pop-btn pop-btn--primary mt-3 inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-base font-bold text-white"
+      >
+        <Icon name="phone" class="h-4 w-4" />
+        Call {icac.phone}
+      </a>
+    </div>
+  </div>
+</section>

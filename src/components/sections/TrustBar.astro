@@ -1,0 +1,22 @@
+---
+import { icac } from "~/data/icac";
+import Icon from "~/components/Icon.astro";
+---
+
+<section class="border-y border-gray-200 bg-white py-6">
+  <div class="mx-auto max-w-6xl px-4">
+    <ul class="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-5">
+      {icac.trustBar.map((item) => (
+        <li class="flex items-start gap-3">
+          <span class="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[var(--color-brand-light)] text-[var(--color-brand)]">
+            <Icon name={item.icon} class="h-4 w-4" />
+          </span>
+          <div class="leading-tight">
+            <div class="text-sm font-bold text-[var(--color-brand-darker)]">{item.label}</div>
+            <div class="text-xs text-[var(--color-ink-soft)]">{item.sublabel}</div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

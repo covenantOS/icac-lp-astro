@@ -1,0 +1,47 @@
+---
+import { icac } from "~/data/icac";
+import Icon from "~/components/Icon.astro";
+---
+
+<div
+  id="mobile-sticky-cta"
+  class="pointer-events-none fixed inset-x-0 bottom-0 z-40 px-3 pb-3 translate-y-[120%] opacity-0 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] lg:hidden"
+>
+  <div class="pointer-events-auto mx-auto flex max-w-md items-stretch gap-2 rounded-2xl bg-white p-1.5 shadow-[0_8px_28px_rgba(15,23,42,0.18)] ring-1 ring-black/5">
+    <a
+      href={icac.phoneHref}
+      class="pop-btn pop-btn--primary flex flex-[1.2] items-center justify-center gap-2 rounded-xl bg-[var(--color-accent)] py-3 text-base font-bold text-white"
+    >
+      <Icon name="phone" class="h-5 w-5" />
+      Call Now
+    </a>
+    <a
+      href="#callback"
+      class="pop-btn pop-btn--brand flex flex-1 items-center justify-center gap-2 rounded-xl bg-[var(--color-brand)] py-3 text-base font-bold text-white"
+    >
+      <Icon name="calendar" class="h-5 w-5" />
+      Book Online
+    </a>
+  </div>
+</div>
+
+<script>
+  // Show the sticky CTA only after the user has scrolled past the hero.
+  const bar = document.getElementById("mobile-sticky-cta");
+  const hero = document.getElementById("top");
+  if (bar && hero && "IntersectionObserver" in window) {
+    const reveal = (show: boolean) => {
+      bar.classList.toggle("translate-y-[120%]", !show);
+      bar.classList.toggle("opacity-0", !show);
+    };
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        const heroIsAboveViewport =
+          !entry.isIntersecting && entry.boundingClientRect.top < 0;
+        reveal(heroIsAboveViewport);
+      },
+      { threshold: 0 },
+    );
+    io.observe(hero);
+  }
+</script>

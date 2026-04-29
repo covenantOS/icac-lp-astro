@@ -1,0 +1,57 @@
+---
+import LandingLayout from "~/layouts/LandingLayout.astro";
+import Header from "~/components/sections/Header.astro";
+import Hero from "~/components/sections/Hero.astro";
+import TrustBar from "~/components/sections/TrustBar.astro";
+import CallbackForm from "~/components/sections/CallbackForm.astro";
+import Services from "~/components/sections/Services.astro";
+import About from "~/components/sections/About.astro";
+import InfoCard from "~/components/sections/InfoCard.astro";
+import HowItWorks from "~/components/sections/HowItWorks.astro";
+import WhyUs from "~/components/sections/WhyUs.astro";
+import Reviews from "~/components/sections/Reviews.astro";
+import ServiceAreas from "~/components/sections/ServiceAreas.astro";
+import Gallery from "~/components/sections/Gallery.astro";
+import FAQ from "~/components/sections/FAQ.astro";
+import FinalCTA from "~/components/sections/FinalCTA.astro";
+import Footer from "~/components/sections/Footer.astro";
+import MobileStickyCTA from "~/components/sections/MobileStickyCTA.astro";
+import { hero } from "~/data/icac";
+
+const title = "Wesley Chapel AC Repair & Installation | I Care Air Care";
+const description =
+  "Same-day AC repair, installation, and maintenance in Wesley Chapel and Tampa Bay. Licensed, insured, family-owned — 4.9★ from 690+ Google reviews. Call (813) 395-2324.";
+---
+
+<LandingLayout title={title} description={description} heroImage={hero.image}>
+  <Header />
+  <Hero />
+  <TrustBar />
+  <CallbackForm />
+  <Services />
+  <About />
+  <InfoCard />
+  <HowItWorks />
+  <WhyUs />
+  <Reviews />
+  <ServiceAreas />
+  <Gallery />
+  <FAQ />
+  <!-- Final CTA + Footer share one continuous dark background image so the
+       bottom of the page reads as a single section, not two stacked ones. -->
+  <div class="relative isolate overflow-hidden bg-[var(--color-brand-darker)] text-white">
+    <div class="absolute inset-0 -z-10">
+      <img
+        src={hero.image}
+        alt=""
+        class="h-full w-full object-cover opacity-30"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="absolute inset-0 bg-gradient-to-br from-[var(--color-brand-darker)] via-[var(--color-brand-dark)]/90 to-[var(--color-brand)]/40"></div>
+    </div>
+    <FinalCTA />
+    <Footer />
+  </div>
+  <MobileStickyCTA />
+</LandingLayout>

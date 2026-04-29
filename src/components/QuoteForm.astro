@@ -1,0 +1,141 @@
+---
+// Lead-capture form. Currently a no-op submit (prevents default + shows
+// thank-you state). Wire `onSubmit` to a webhook (GHL, Zapier, etc.) when
+// ready — see the script block at the bottom.
+
+interface Props {
+  formId?: string;
+  variant?: "light" | "dark";
+}
+const { formId = "quote-form", variant = "light" } = Astro.props;
+const isDark = variant === "dark";
+---
+
+<form
+  id={formId}
+  class={`space-y-4 rounded-2xl p-6 sm:p-8 ${
+    isDark
+      ? "bg-white/95 ring-1 ring-white/20 shadow-2xl"
+      : "bg-white ring-1 ring-black/5 shadow-2xl"
+  }`}
+  method="post"
+  action="#"
+  novalidate
+>
+  <div class="text-center">
+    <h2 class="text-2xl font-bold text-[var(--color-brand-darker)]">Request A Callback</h2>
+    <p class="mt-1 text-sm text-[var(--color-ink-soft)]">We'll call you back in minutes, not hours.</p>
+  </div>
+
+  <div>
+    <label class="mb-1 block text-xs font-semibold text-[var(--color-ink)]" for={`${formId}-name`}>
+      Full Name
+    </label>
+    <input
+      id={`${formId}-name`}
+      name="full_name"
+      required
+      autocomplete="name"
+      placeholder="Jane Doe"
+      class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base placeholder:text-gray-400 focus:border-[var(--color-brand)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/30"
+    />
+  </div>
+
+  <div>
+    <label class="mb-1 block text-xs font-semibold text-[var(--color-ink)]" for={`${formId}-phone`}>
+      Phone Number <span class="text-[var(--color-brand)]">*</span>
+    </label>
+    <input
+      id={`${formId}-phone`}
+      type="tel"
+      name="phone"
+      required
+      autocomplete="tel"
+      placeholder="(813) 000-0000"
+      class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base placeholder:text-gray-400 focus:border-[var(--color-brand)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/30"
+    />
+  </div>
+
+  <div>
+    <label class="mb-1 block text-xs font-semibold text-[var(--color-ink)]" for={`${formId}-zip`}>
+      ZIP Code
+    </label>
+    <input
+      id={`${formId}-zip`}
+      name="zip"
+      inputmode="numeric"
+      pattern="[0-9]{5}"
+      maxlength="5"
+      autocomplete="postal-code"
+      placeholder="33543"
+      class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base placeholder:text-gray-400 focus:border-[var(--color-brand)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/30"
+    />
+  </div>
+
+  <div>
+    <label class="mb-1 block text-xs font-semibold text-[var(--color-ink)]" for={`${formId}-service`}>
+      Service Needed
+    </label>
+    <select
+      id={`${formId}-service`}
+      name="service"
+      class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-base focus:border-[var(--color-brand)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/30"
+    >
+      <option value="">Select a service…</option>
+      <option value="ac-repair">AC Repair</option>
+      <option value="ac-installation">New AC / Replacement</option>
+      <option value="ac-maintenance">AC Tune-Up / Maintenance</option>
+      <option value="heating">Heating / Furnace</option>
+      <option value="air-duct-cleaning">Air Duct Cleaning</option>
+      <option value="ductless-mini-split">Ductless / Mini-Split</option>
+      <option value="indoor-air-quality">Indoor Air Quality</option>
+      <option value="commercial">Commercial</option>
+      <option value="other">Other / Not Sure</option>
+    </select>
+  </div>
+
+  <div>
+    <label class="mb-1 block text-xs font-semibold text-[var(--color-ink)]" for={`${formId}-message`}>
+      What's going on?
+    </label>
+    <textarea
+      id={`${formId}-message`}
+      name="message"
+      rows="2"
+      placeholder="E.g., AC blowing warm, weird noises, age of system…"
+      class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-base placeholder:text-gray-400 focus:border-[var(--color-brand)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/30"
+    ></textarea>
+  </div>
+
+  <button
+    type="submit"
+    class="pop-btn pop-btn--primary w-full rounded-lg bg-[var(--color-accent)] px-4 py-3.5 text-base font-bold uppercase tracking-wide text-white"
+  >
+    Request My Callback
+  </button>
+
+  <p class="text-center text-xs text-gray-500">
+    By submitting, you agree to be contacted about your service request.
+  </p>
+
+  <div class="thank-you hidden rounded-lg bg-emerald-50 p-4 text-center text-sm text-emerald-800 ring-1 ring-emerald-200">
+    Got it — we'll call you right back. Need it now? <a href="tel:+18133952324" class="font-bold underline">(813) 395-2324</a>
+  </div>
+</form>
+
+<script define:vars={{ formId }}>
+  // TODO: replace this with a real webhook POST (GHL / Zapier / Cloudflare Worker).
+  // For now, we prevent default + show the thank-you state.
+  const form = document.getElementById(formId);
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      console.log("[icac-lp] form submit", { formId, data });
+      const submitBtn = form.querySelector("button[type=submit]");
+      const thankYou = form.querySelector(".thank-you");
+      if (submitBtn) submitBtn.setAttribute("disabled", "true");
+      if (thankYou) thankYou.classList.remove("hidden");
+    });
+  }
+</script>

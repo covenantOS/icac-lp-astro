@@ -1,0 +1,109 @@
+---
+import { icac, hero } from "~/data/icac";
+import Icon from "~/components/Icon.astro";
+import GoogleLogo from "~/components/GoogleLogo.astro";
+---
+
+<section id="top" class="relative isolate overflow-hidden bg-[var(--color-brand-darker)] text-white">
+  <!-- Background image with deep teal gradient overlay -->
+  <div class="absolute inset-0 -z-10">
+    <img
+      src={hero.image}
+      alt=""
+      class="h-full w-full object-cover opacity-25"
+      width="1920"
+      height="1080"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-gradient-to-br from-[var(--color-brand-darker)] via-[var(--color-brand-dark)]/90 to-[var(--color-brand)]/40"></div>
+  </div>
+
+  <div class="mx-auto max-w-6xl px-4 pb-14 pt-8 sm:pt-12">
+    <!-- Star rating chip -->
+    <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 ring-1 ring-white/20 backdrop-blur">
+      <span class="flex text-[var(--color-accent)]">
+        <Icon name="star" class="h-4 w-4" />
+        <Icon name="star" class="h-4 w-4" />
+        <Icon name="star" class="h-4 w-4" />
+        <Icon name="star" class="h-4 w-4" />
+        <Icon name="star" class="h-4 w-4" />
+      </span>
+      <span class="text-xs font-semibold tracking-wide">
+        {icac.googleRating} from {icac.googleReviewCount} reviews
+      </span>
+    </div>
+
+    <h1 class="mt-5 text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+      Wesley Chapel's<br />
+      <span class="text-[var(--color-accent)]">Most Trusted</span><br />
+      AC Team
+    </h1>
+    <p class="mt-5 max-w-2xl text-base text-white/85 sm:text-lg">
+      {hero.subheadline}
+    </p>
+
+    <!-- Spotlight Google review card -->
+    <div class="mt-8 max-w-xl rounded-2xl bg-white p-5 text-[var(--color-ink)] shadow-xl ring-1 ring-black/5 sm:p-6">
+      <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+        <div class="flex items-center gap-3">
+          <span class="text-3xl font-bold text-[#202124]">{icac.googleRating}</span>
+          <div class="flex flex-col">
+            <span class="flex" style="color:#FBBC04">
+              <Icon name="star" class="h-4 w-4" />
+              <Icon name="star" class="h-4 w-4" />
+              <Icon name="star" class="h-4 w-4" />
+              <Icon name="star" class="h-4 w-4" />
+              <Icon name="star" class="h-4 w-4" />
+            </span>
+            <span class="text-xs text-[#5f6368]">{icac.googleReviewCount} Google Reviews</span>
+          </div>
+        </div>
+        <GoogleLogo class="h-7 w-7" />
+      </div>
+      <div class="mt-4 flex items-start gap-3">
+        <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[var(--color-brand)] text-sm font-semibold text-white">
+          {hero.spotlightReview.initials}
+        </span>
+        <div class="min-w-0">
+          <p class="text-sm italic leading-relaxed text-[#3c4043]">"{hero.spotlightReview.text}"</p>
+          <p class="mt-2 text-xs font-semibold text-[var(--color-brand-darker)]">
+            {hero.spotlightReview.name} · {hero.spotlightReview.location}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+      <a
+        href={icac.phoneHref}
+        class="pop-btn pop-btn--primary inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-7 py-4 text-lg font-bold text-white shadow-lg"
+      >
+        <Icon name="phone" class="h-5 w-5" />
+        Call {icac.phone}
+      </a>
+      <a
+        href="#callback"
+        class="pop-btn pop-btn--secondary inline-flex items-center justify-center gap-2 rounded-full bg-white/10 px-7 py-4 text-lg font-bold text-white ring-1 ring-white/30 backdrop-blur"
+      >
+        <Icon name="calendar" class="h-5 w-5" />
+        Schedule Service
+      </a>
+    </div>
+    <p class="mt-3 text-xs text-white/65">{icac.responseTime}</p>
+
+    <!-- Trust chip row -->
+    <ul class="mt-8 grid grid-cols-2 gap-3 rounded-2xl bg-black/30 p-4 ring-1 ring-white/10 sm:grid-cols-3 lg:grid-cols-5">
+      {hero.trustChips.map((chip) => (
+        <li class="flex items-center gap-2 text-sm font-semibold text-white/90">
+          <span class="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white">
+            <Icon name="check" class="h-3 w-3" />
+          </span>
+          <span>{chip}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

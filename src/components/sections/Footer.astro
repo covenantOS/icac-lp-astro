@@ -1,0 +1,28 @@
+---
+import { icac } from "~/data/icac";
+---
+
+<footer class="relative pb-12 pt-4 text-white">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="border-t border-white/10 pt-10">
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:items-center">
+        <div class="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-start sm:text-left">
+          <img src="/images/shared/logo.png" alt={icac.name} class="h-14 w-14 rounded-lg bg-white/95 p-1.5" width="56" height="56" loading="lazy" decoding="async" />
+          <div>
+            <div class="text-base font-bold">{icac.name}</div>
+            <p class="mt-1 text-sm text-white/75">{icac.footer.serviceNote}</p>
+            <p class="mt-1 text-xs text-white/55">{icac.footer.licenseNote}</p>
+          </div>
+        </div>
+        <div class="text-center text-sm sm:text-right">
+          <div><span class="font-bold">Phone:</span> <a href={icac.phoneHref} class="hover:text-[var(--color-accent)]">{icac.phone}</a></div>
+          <div class="mt-1"><span class="font-bold">{icac.footer.location}</span></div>
+          <div class="mt-1 text-white/70">{icac.hours}</div>
+        </div>
+      </div>
+      <div class="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/60">
+        © {icac.footer.copyrightYear} {icac.name}. All Rights Reserved.
+      </div>
+    </div>
+  </div>
+</footer>

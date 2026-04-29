@@ -1,0 +1,52 @@
+---
+import "~/styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  noindex?: boolean;
+  heroImage?: string;
+}
+
+const { title, description, canonical, noindex = true, heroImage } = Astro.props;
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    {heroImage && <link rel="preload" as="image" href={heroImage} fetchpriority="high" />}
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <!-- Spectrum / call-tracking script slot — paste tracking snippet here when provided. -->
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Press-feedback handler for any element with the .pop-btn class.
+      // Uses touchstart/touchend (and mouse equivalents) instead of CSS :active
+      // because iOS Safari can drop :active on anchor taps before the squish
+      // animation has time to render.
+      document.querySelectorAll<HTMLElement>(".pop-btn").forEach((btn) => {
+        const press = () => btn.classList.add("is-pressed");
+        const release = () => btn.classList.remove("is-pressed");
+        btn.addEventListener("touchstart", press, { passive: true });
+        btn.addEventListener("touchend", release);
+        btn.addEventListener("touchcancel", release);
+        btn.addEventListener("mousedown", press);
+        btn.addEventListener("mouseup", release);
+        btn.addEventListener("mouseleave", release);
+      });
+    </script>
+  </body>
+</html>

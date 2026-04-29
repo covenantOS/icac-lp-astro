@@ -1,0 +1,37 @@
+---
+import { infoCard } from "~/data/icac";
+import Icon from "~/components/Icon.astro";
+---
+
+<section class="relative isolate overflow-hidden bg-[var(--color-brand-darker)] py-20 text-white">
+  <div class="absolute inset-0 -z-10">
+    <img
+      src={infoCard.image}
+      alt=""
+      class="h-full w-full object-cover opacity-25"
+      width="1920"
+      height="800"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-brand-darker)]/95 via-[var(--color-brand-darker)]/80 to-[var(--color-brand-darker)]/95"></div>
+  </div>
+
+  <div class="mx-auto max-w-4xl px-4">
+    <div class="rounded-2xl border border-white/15 bg-white/5 p-8 backdrop-blur sm:p-10">
+      <div class="flex items-start gap-4">
+        <span class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[var(--color-accent)] text-white">
+          <Icon name="info" class="h-5 w-5" />
+        </span>
+        <div>
+          <h2 class="text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">
+            {infoCard.headline}
+          </h2>
+          <p class="mt-3 text-base leading-relaxed text-white/85">
+            {infoCard.body}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

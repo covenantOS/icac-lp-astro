@@ -1,0 +1,67 @@
+---
+import { icac, about } from "~/data/icac";
+import Icon from "~/components/Icon.astro";
+---
+
+<section id="about" class="bg-white py-16 sm:py-20">
+  <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 lg:grid-cols-2 lg:gap-14">
+    <div class="text-center lg:text-left">
+      <p class="text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-brand)]">{about.eyebrow}</p>
+      <h2 class="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-[var(--color-brand-darker)] sm:text-4xl lg:text-5xl">
+        {about.headline}
+      </h2>
+      <div class="mt-6 space-y-4 text-base leading-relaxed text-[var(--color-ink-soft)]">
+        {about.body.map((p) => <p>{p}</p>)}
+      </div>
+
+      <ul class="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2">
+        {about.highlights.map((h) => (
+          <li class="flex items-center gap-2 text-sm font-semibold text-[var(--color-brand-darker)]">
+            <span class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[var(--color-brand-light)] text-[var(--color-brand)]">
+              <Icon name={h.icon} class="h-4 w-4" />
+            </span>
+            <span>{h.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="lg:pl-4">
+      <div class="rounded-2xl border border-gray-200 bg-[var(--color-brand-lighter)] p-6 shadow-sm sm:p-8">
+        <p class="text-center text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-brand)]">
+          Meet The Owner
+        </p>
+        <figure class="mt-5 text-center">
+          <div class="mx-auto aspect-square w-full max-w-[260px] overflow-hidden rounded-2xl ring-4 ring-white shadow-md">
+            <img
+              src={icac.owner.photo}
+              alt={icac.owner.name}
+              class="h-full w-full object-cover"
+              width="520"
+              height="520"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <figcaption class="mt-4">
+            <div class="text-lg font-bold text-[var(--color-brand-darker)]">{icac.owner.name}</div>
+            <div class="text-sm text-[var(--color-ink-soft)]">{icac.owner.title}</div>
+          </figcaption>
+        </figure>
+
+        <div class="mt-6 overflow-hidden rounded-xl ring-1 ring-black/5">
+          <img
+            src={icac.team.photo}
+            alt={icac.team.caption}
+            class="aspect-[16/10] w-full object-cover"
+            width="640"
+            height="400"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <p class="mt-3 text-center text-xs italic text-[var(--color-ink-soft)]">{icac.team.caption}</p>
+      </div>
+    </div>
+  </div>
+</section>
