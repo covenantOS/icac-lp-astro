@@ -194,23 +194,6 @@ export const services: Service[] = [
     signals: ["Before/After Photos"],
   },
   {
-    slug: "ductless-mini-split",
-    icon: "leaf",
-    title: "Ductless Mini-Splits",
-    shortLabel: "Mini-Split",
-    blurb: "Targeted comfort for additions, garages, and bonus rooms.",
-    description:
-      "Adding on? Converting a garage? Got one room that's always hot? A ductless mini-split is the cleanest, most efficient way to condition spaces your central system can't reach. We design, install, and service them.",
-    bullets: [
-      "Single-zone & multi-zone systems",
-      "Garage, bonus-room & addition installs",
-      "Mitsubishi, Daikin, Fujitsu",
-      "Indoor unit repair & cleaning",
-      "Refrigerant line set installation",
-    ],
-    image: "/images/services/mini-split.webp",
-  },
-  {
     slug: "indoor-air-quality",
     icon: "sparkle",
     title: "Indoor Air Quality",
@@ -444,11 +427,6 @@ export const gallery = {
       image: "/images/gallery/repair-tech.webp",
       title: "AC Repair",
       description: "On-site refrigerant pressure testing and leak detection.",
-    },
-    {
-      image: "/images/gallery/mini-split.webp",
-      title: "Ductless Mini-Split",
-      description: "Wall-mounted indoor unit install in a converted garage.",
     },
     {
       image: "/images/team/icac-team.webp",
