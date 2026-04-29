@@ -3,7 +3,6 @@ import LandingLayout from "~/layouts/LandingLayout.astro";
 import Header from "~/components/sections/Header.astro";
 import Hero from "~/components/sections/Hero.astro";
 import TrustBar from "~/components/sections/TrustBar.astro";
-import CallbackForm from "~/components/sections/CallbackForm.astro";
 import Services from "~/components/sections/Services.astro";
 import About from "~/components/sections/About.astro";
 import InfoCard from "~/components/sections/InfoCard.astro";
@@ -20,14 +19,13 @@ import { hero } from "~/data/icac";
 
 const title = "Wesley Chapel AC Repair & Installation | I Care Air Care";
 const description =
-  "Same-day AC repair, installation, and maintenance in Wesley Chapel and Tampa Bay. Licensed, insured, family-owned — 4.9★ from 690+ Google reviews. Call (813) 395-2324.";
+  "Same-day AC repair, installation, and maintenance in Wesley Chapel and Tampa Bay. Licensed, insured, family-owned. 4.9★ from 700+ Google reviews. Call (813) 395-2324.";
 ---
 
 <LandingLayout title={title} description={description} heroImage={hero.image}>
   <Header />
   <Hero />
   <TrustBar />
-  <CallbackForm />
   <Services />
   <About />
   <InfoCard />

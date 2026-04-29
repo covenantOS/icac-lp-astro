@@ -56,7 +56,7 @@ const otherCities = icac.cities.slice(1).join(" · ");
       <h3 class="text-center text-2xl font-extrabold tracking-tight text-[var(--color-brand-darker)] sm:text-3xl">
         Find Your ZIP Code
       </h3>
-      <p class="mt-2 text-center text-sm text-[var(--color-ink-soft)]">If your ZIP isn't listed, give us a call — we probably still cover you.</p>
+      <p class="mt-2 text-center text-sm text-[var(--color-ink-soft)]">If your ZIP isn't listed, give us a call. We probably still cover you.</p>
       <div class="mt-6 flex justify-center">
         <ul class="grid grid-cols-3 gap-x-6 gap-y-2.5 sm:grid-cols-4 sm:gap-x-10 lg:grid-cols-7">
           {icac.zips.map((zip) => (
@@ -68,6 +68,31 @@ const otherCities = icac.cities.slice(1).join(" · ");
             </li>
           ))}
         </ul>
+      </div>
+
+      <div class="mt-10 rounded-2xl border border-[var(--color-brand)]/20 bg-[var(--color-brand-lighter)] p-6 text-center sm:p-8">
+        <p class="text-base font-semibold text-[var(--color-brand-darker)] sm:text-lg">
+          Find your ZIP code? Don't see it? Either way, give us a call.
+        </p>
+        <p class="mt-2 text-sm text-[var(--color-ink-soft)]">
+          We cover most of Pasco and Hillsborough. If your area isn't listed, there's a good chance we still service it.
+        </p>
+        <div class="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a
+            href={icac.phoneHref}
+            class="pop-btn pop-btn--primary inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-base font-bold text-white shadow-md"
+          >
+            <Icon name="phone" class="h-4 w-4" />
+            Call {icac.phone}
+          </a>
+          <a
+            href="#callback"
+            class="pop-btn pop-btn--secondary inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-base font-bold text-[var(--color-brand-darker)] ring-1 ring-[var(--color-brand)]/30"
+          >
+            <Icon name="calendar" class="h-4 w-4" />
+            Request Callback
+          </a>
+        </div>
       </div>
     </div>
   </div>

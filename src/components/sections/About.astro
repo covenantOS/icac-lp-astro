@@ -49,18 +49,15 @@ import Icon from "~/components/Icon.astro";
           </figcaption>
         </figure>
 
-        <div class="mt-6 overflow-hidden rounded-xl ring-1 ring-black/5">
-          <img
-            src={icac.team.photo}
-            alt={icac.team.caption}
-            class="aspect-[16/10] w-full object-cover"
-            width="640"
-            height="400"
-            loading="lazy"
-            decoding="async"
-          />
+        <div class="mt-6 flex justify-center">
+          <a
+            href={icac.phoneHref}
+            class="pop-btn pop-btn--primary inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-base font-bold text-white shadow-md"
+          >
+            <Icon name="phone" class="h-4 w-4" />
+            Call Tim & The Team
+          </a>
         </div>
-        <p class="mt-3 text-center text-xs italic text-[var(--color-ink-soft)]">{icac.team.caption}</p>
       </div>
     </div>
   </div>

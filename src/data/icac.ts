@@ -12,12 +12,12 @@ export const icac = {
   city: "Wesley Chapel",
   state: "FL",
   serviceArea: "Wesley Chapel & Tampa Bay",
-  hours: "Mon–Sat, 7:00am – 7:00pm · Sunday by appointment",
+  hours: "Mon to Sat, 7:00am to 7:00pm",
   responseTime: "Average callback under 60 seconds",
   yearsInBusiness: "15+",
   customersServed: "5,000+",
   googleRating: "4.9",
-  googleReviewCount: "690+",
+  googleReviewCount: "700+",
   owner: {
     name: "Tim Hawk",
     title: "Owner & Founder",
@@ -25,7 +25,7 @@ export const icac = {
   },
   team: {
     photo: "/images/team/icac-team.webp",
-    caption: "The I Care Air Care team — licensed, insured, background-checked.",
+    caption: "The I Care Air Care team. Licensed, insured, background-checked.",
   },
   cities: [
     "Wesley Chapel",
@@ -53,7 +53,7 @@ export const icac = {
     "33523", "33525", "34638", "34639",
   ],
   trustBar: [
-    { label: "4.9 Google Reviews", sublabel: "690+ verified reviews", icon: "google" as const },
+    { label: "4.9 Google Reviews", sublabel: "700+ verified reviews", icon: "google" as const },
     { label: "Licensed & Insured", sublabel: "Florida HVAC licensed", icon: "shield" as const },
     { label: "Same-Day Service", sublabel: "Most repairs same day", icon: "bolt" as const },
     { label: "Background Checked", sublabel: "Every technician", icon: "badge" as const },
@@ -62,7 +62,7 @@ export const icac = {
   socialProof: {
     rating: "4.9",
     ratingLabel: "Google Rating",
-    reviews: "690+",
+    reviews: "700+",
     reviewsLabel: "Google Reviews",
     years: "15+",
     yearsLabel: "Years In Business",
@@ -81,7 +81,7 @@ export const hero = {
   eyebrow: "Wesley Chapel's Most Trusted AC Team",
   headline: "Wesley Chapel's Most Trusted AC Team",
   subheadline: "Same-day AC repair, installation, and maintenance from a licensed team your neighbors have trusted for 15+ years.",
-  descriptors: ["4.9★ on Google", "690+ Reviews", "Same-Day Service", "Licensed & Insured"],
+  descriptors: ["4.9★ on Google", "700+ Reviews", "Same-Day Service", "Licensed & Insured"],
   image: "/images/shared/hero-bg.webp",
   spotlightReview: {
     name: "Dave Barry",
@@ -108,9 +108,9 @@ export const services: Service[] = [
     icon: "wrench",
     title: "AC Repair",
     shortLabel: "AC Repair",
-    blurb: "Cool home back fast — most repairs done same-day.",
+    blurb: "Cool home back fast. Most repairs done same-day.",
     description:
-      "AC blowing warm? Strange noises? System short-cycling? Our technicians diagnose the real cause — not just the symptom — and fix it on the first visit whenever possible. Trucks are stocked with the parts that fail most often in Florida heat.",
+      "AC blowing warm? Strange noises? System short-cycling? Our technicians diagnose the real cause, not just the symptom, and fix it on the first visit whenever possible. Trucks are stocked with the parts that fail most often in Florida heat.",
     bullets: [
       "No-cool / warm-air diagnostics",
       "Refrigerant leak detection & recharge",
@@ -128,7 +128,7 @@ export const services: Service[] = [
     shortLabel: "New AC",
     blurb: "Right-sized, properly installed, financing available.",
     description:
-      "A new AC is only as good as the install. We perform a full Manual J load calculation, check ductwork, and install your new system to the manufacturer's spec — so you get the efficiency, comfort, and warranty coverage you paid for.",
+      "A new AC is only as good as the install. We perform a full Manual J load calculation, check ductwork, and install your new system to the manufacturer's spec, so you get the efficiency, comfort, and warranty coverage you paid for.",
     bullets: [
       "Free in-home estimate & load calculation",
       "Top brands: Carrier, Trane, Lennox, Rheem",
@@ -146,7 +146,7 @@ export const services: Service[] = [
     shortLabel: "Tune-Up",
     blurb: "Catch problems early. Lower bills. Longer system life.",
     description:
-      "Most AC failures are preventable. Our maintenance plans keep your system efficient and warranty-compliant — coil cleaning, refrigerant checks, electrical inspection, and a written report on every visit.",
+      "Most AC failures are preventable. Our maintenance plans keep your system efficient and warranty-compliant. Coil cleaning, refrigerant checks, electrical inspection, and a written report on every visit.",
     bullets: [
       "Multi-point system inspection",
       "Coil & condensate line cleaning",
@@ -162,9 +162,9 @@ export const services: Service[] = [
     icon: "flame",
     title: "Heating & Furnace Repair",
     shortLabel: "Heating",
-    blurb: "When that one cold week hits — we're already on the road.",
+    blurb: "When that one cold week hits, we're already on the road.",
     description:
-      "Florida winters are short but real. Heat pumps, gas furnaces, electric strips — we service them all. We respond fast on cold nights and stock the parts that strand homeowners most often.",
+      "Florida winters are short but real. Heat pumps, gas furnaces, electric strips: we service them all. We respond fast on cold nights and stock the parts that strand homeowners most often.",
     bullets: [
       "Heat-pump diagnostics & repair",
       "Gas furnace inspection & repair",
@@ -182,7 +182,7 @@ export const services: Service[] = [
     shortLabel: "Duct Cleaning",
     blurb: "Better airflow, cleaner air, fewer allergens.",
     description:
-      "Dirty ducts hurt your AC's efficiency and your family's air quality. We use professional rotary brush + negative-pressure vacuum equipment — not a shop-vac in a uniform. Before/after photos on every job.",
+      "Dirty ducts hurt your AC's efficiency and your family's air quality. We use professional rotary brush + negative-pressure vacuum equipment, not a shop-vac in a uniform. Before/after photos on every job.",
     bullets: [
       "Full supply & return duct cleaning",
       "Coil & blower wheel cleaning",
@@ -217,7 +217,7 @@ export const services: Service[] = [
     shortLabel: "Air Quality",
     blurb: "UV lights, filtration, and humidity control that actually work.",
     description:
-      "Florida humidity + sealed homes = poor indoor air. We install proven IAQ solutions — UV-C germicidal lights, MERV-rated filtration, and whole-home dehumidifiers — sized for your system, not upsold.",
+      "Florida humidity + sealed homes = poor indoor air. We install proven IAQ solutions like UV-C germicidal lights, MERV-rated filtration, and whole-home dehumidifiers, sized for your system, not upsold.",
     bullets: [
       "UV-C germicidal lights",
       "MERV 11–16 filter upgrades",
@@ -232,7 +232,7 @@ export const services: Service[] = [
     icon: "home",
     title: "Light Commercial HVAC",
     shortLabel: "Commercial",
-    blurb: "Offices, retail, restaurants — keep your business cool.",
+    blurb: "Offices, retail, restaurants. Keep your business cool.",
     description:
       "We service light commercial systems for small offices, retail, restaurants, and tenant build-outs across Tampa Bay. Service agreements, emergency response, and rooftop unit work.",
     bullets: [
@@ -252,8 +252,8 @@ export const about = {
   eyebrow: "About I Care Air Care",
   headline: "Locally Owned. Family Run. Built On Repeat Customers.",
   body: [
-    "I Care Air Care is a family-owned heating and cooling company based right here in Wesley Chapel. For 15+ years, we've built our business one home at a time — and most of our work today comes from referrals and customers we served years ago.",
-    "Owner Tim Hawk leads a team of licensed, insured, and background-checked technicians who treat your home like ours. No high-pressure sales, no surprise charges — just honest diagnostics, upfront pricing, and the kind of work you'd want done at your own house.",
+    "I Care Air Care is a family-owned heating and cooling company based right here in Wesley Chapel. For 15+ years, we've built our business one home at a time, and most of our work today comes from referrals and customers we served years ago.",
+    "Owner Tim Hawk leads a team of licensed, insured, and background-checked technicians who treat your home like ours. No high-pressure sales, no surprise charges. Just honest diagnostics, upfront pricing, and the kind of work you'd want done at your own house.",
   ],
   highlights: [
     { icon: "shield" as const, label: "Florida Licensed & Insured" },
@@ -271,7 +271,7 @@ export const howItWorks = {
     {
       number: "01",
       title: "Call or Book Online",
-      description: "Reach a real person — average callback under 60 seconds. We'll book a same-day window when one's available.",
+      description: "Reach a real person. Average callback under 60 seconds. We'll book a same-day window when one's available.",
     },
     {
       number: "02",
@@ -306,31 +306,16 @@ export const whyUs = {
       title: "Honest, Upfront Pricing",
       description: "Written quote before we touch a wrench. No surprise charges, no high-pressure sales tactics.",
     },
-    {
-      icon: "team" as const,
-      title: "Background-Checked Techs",
-      description: "Every technician is licensed, insured, drug-tested, and background-checked. We treat your home like ours.",
-    },
-    {
-      icon: "thumb" as const,
-      title: "Satisfaction Guaranteed",
-      description: "If it's not right, we make it right. That's how we've built 690+ five-star reviews on Google.",
-    },
-    {
-      icon: "dollar" as const,
-      title: "Financing Available",
-      description: "Synchrony financing on installs and major repairs. Affordable monthly payments — apply in minutes.",
-    },
   ] as Feature[],
 };
 
 // ---------- REVIEWS ----------
-// Pulled directly from ICAC's Google Business Profile (4.9 / 690+).
+// Pulled directly from ICAC's Google Business Profile (4.9 / 700+).
 
 export const reviews = {
   eyebrow: "What Your Neighbors Say",
   headline: "Real Reviews From Real Wesley Chapel Homeowners",
-  intro: "4.9 stars across 690+ verified Google reviews.",
+  intro: "4.9 stars across 700+ verified Google reviews.",
   items: [
     {
       name: "Dave Barry",
@@ -430,7 +415,7 @@ export const reviews = {
 export const serviceAreas = {
   eyebrow: "Our Service Area",
   headline: "Serving Wesley Chapel & The Greater Tampa Bay Area",
-  body: "Based in Wesley Chapel, our team covers all of Pasco and Hillsborough counties — from New Tampa and Lutz out to Land O' Lakes, Zephyrhills, Trinity, and the Tampa metro. If you're not sure we serve your area, just call — we probably do.",
+  body: "Based in Wesley Chapel, our team covers all of Pasco and Hillsborough counties, from New Tampa and Lutz out to Land O' Lakes, Zephyrhills, Trinity, and the Tampa metro. If you're not sure we serve your area, just call. We probably do.",
   mapImage: "/images/shared/service-area-map.webp",
 };
 
@@ -466,7 +451,7 @@ export const gallery = {
       description: "Wall-mounted indoor unit install in a converted garage.",
     },
     {
-      image: "/images/gallery/team.webp",
+      image: "/images/team/icac-team.webp",
       title: "The I Care Air Care Team",
       description: "Licensed, insured, and background-checked technicians.",
     },
@@ -477,7 +462,7 @@ export const gallery = {
 
 export const infoCard = {
   headline: "Built For Florida Heat & Humidity",
-  body: "Tampa Bay AC systems run 9 months a year and live with brutal humidity. We build, install, and maintain systems for that reality — not the brochure. Heat-pump expertise, humidity-aware sizing, and the kind of preventive work that keeps your warranty intact.",
+  body: "Tampa Bay AC systems run 9 months a year and live with brutal humidity. We build, install, and maintain systems for that reality, not the brochure. Heat-pump expertise, humidity-aware sizing, and the kind of preventive work that keeps your warranty intact.",
   image: "/images/shared/hero-bg.webp",
 };
 
@@ -491,22 +476,22 @@ export const faqs = {
     {
       question: "Do you offer same-day service?",
       answer:
-        "Yes — we run same-day calls every business day, and many evenings and weekends. Average callback is under 60 seconds. Call us and we'll tell you the next available window in real time.",
+        "Yes. We run same-day calls every business day, and many evenings and weekends. Average callback is under 60 seconds. Call us and we'll tell you the next available window in real time.",
     },
     {
       question: "How much does an AC repair cost?",
       answer:
-        "It depends on what's actually wrong. A capacitor swap is very different from a compressor failure. We charge a flat diagnostic fee, then give you a written, upfront price before any repair work begins — so you decide before any meter starts running.",
+        "It depends on what's actually wrong. A capacitor swap is very different from a compressor failure. We charge a flat diagnostic fee, then give you a written, upfront price before any repair work begins, so you decide before any meter starts running.",
     },
     {
       question: "When should I replace my AC vs. repair it?",
       answer:
-        "Rule of thumb: if the system is 12+ years old and the repair is over $1,500, replacement usually pays back faster in efficiency savings — especially in Florida. We'll quote both honestly and let you choose. No high-pressure sales.",
+        "Rule of thumb: if the system is 12+ years old and the repair is over $1,500, replacement usually pays back faster in efficiency savings, especially in Florida. We'll quote both honestly and let you choose. No high-pressure sales.",
     },
     {
       question: "Do you offer financing on new AC systems?",
       answer:
-        "Yes — we partner with Synchrony for affordable monthly payments on installations and major repairs. Approval takes minutes, and we walk you through it with the install quote.",
+        "Yes. We partner with Synchrony for affordable monthly payments on installations and major repairs. Approval takes minutes, and we walk you through it with the install quote.",
     },
     {
       question: "Are your technicians licensed and background-checked?",
@@ -516,12 +501,12 @@ export const faqs = {
     {
       question: "What areas do you serve?",
       answer:
-        "We serve all of Wesley Chapel and the greater Tampa Bay area — including New Tampa, Lutz, Land O' Lakes, Trinity, Odessa, Carrollwood, Zephyrhills, Brandon, and Riverview. If your ZIP isn't on our list, call us — we probably still cover it.",
+        "We serve all of Wesley Chapel and the greater Tampa Bay area, including New Tampa, Lutz, Land O' Lakes, Trinity, Odessa, Carrollwood, Zephyrhills, Brandon, and Riverview. If your ZIP isn't on our list, call us. We probably still cover it.",
     },
     {
       question: "Do you service all brands of AC?",
       answer:
-        "Yes. We service every major brand — Carrier, Trane, Lennox, Rheem, Goodman, American Standard, Bryant, York, Mitsubishi, Daikin, and more. Maintenance work doesn't void your factory warranty.",
+        "Yes. We service every major brand: Carrier, Trane, Lennox, Rheem, Goodman, American Standard, Bryant, York, Mitsubishi, Daikin, and more. Maintenance work doesn't void your factory warranty.",
     },
     {
       question: "What does an AC tune-up include?",
@@ -536,5 +521,5 @@ export const faqs = {
 export const finalCta = {
   eyebrow: "Serving Wesley Chapel & Tampa Bay",
   headline: "Ready For Cool Comfort You Can Count On?",
-  body: "Same-day service. Upfront pricing. 690+ five-star Google reviews. Call now or request a callback — we usually answer within 60 seconds.",
+  body: "Same-day service. Upfront pricing. 700+ five-star Google reviews. Call now or request a callback. We usually answer within 60 seconds.",
 };
