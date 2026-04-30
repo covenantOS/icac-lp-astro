@@ -429,9 +429,9 @@ export const gallery = {
       description: "On-site refrigerant pressure testing and leak detection.",
     },
     {
-      image: "/images/services/heating.webp",
-      title: "Heating & Furnace",
-      description: "Heat-pump diagnostics and gas furnace repair when cold snaps hit.",
+      image: "/images/services/indoor-air-quality.webp",
+      title: "Indoor Air Quality",
+      description: "UV-C lights, MERV filtration, and humidity control sized for Florida homes.",
     },
     {
       image: "/images/team/icac-team.webp",
