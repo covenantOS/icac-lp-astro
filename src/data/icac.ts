@@ -429,6 +429,11 @@ export const gallery = {
       description: "On-site refrigerant pressure testing and leak detection.",
     },
     {
+      image: "/images/services/heating.webp",
+      title: "Heating & Furnace",
+      description: "Heat-pump diagnostics and gas furnace repair when cold snaps hit.",
+    },
+    {
       image: "/images/team/icac-team.webp",
       title: "The I Care Air Care Team",
       description: "Licensed, insured, and background-checked technicians.",
