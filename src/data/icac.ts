@@ -137,7 +137,7 @@ export const services: Service[] = [
       "Synchrony financing available",
     ],
     image: "/images/services/ac-installation.webp",
-    signals: ["Free Estimates", "Financing Available"],
+    signals: ["Upfront Pricing", "Financing Available"],
   },
   {
     slug: "ac-maintenance",
