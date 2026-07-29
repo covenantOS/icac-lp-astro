@@ -130,7 +130,7 @@ export const services: Service[] = [
     description:
       "A new AC is only as good as the install. We perform a full Manual J load calculation, check ductwork, and install your new system to the manufacturer's spec, so you get the efficiency, comfort, and warranty coverage you paid for.",
     bullets: [
-      "Free in-home estimate & load calculation",
+      "In-home estimate & load calculation",
       "Top brands: Carrier, Trane, Lennox, Rheem",
       "Heat pump & high-efficiency systems",
       "Full warranty registration & paperwork",
