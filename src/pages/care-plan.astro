@@ -1,0 +1,398 @@
+---
+// Care Plan landing page for the Nov to Dec 2026 re-touch emails.
+// Colors follow icareaircare.com and the emails (cp-* tokens in global.css),
+// not the bright teal of the PPC page at /.
+import LandingLayout from "~/layouts/LandingLayout.astro";
+import Icon from "~/components/Icon.astro";
+import GoogleLogo from "~/components/GoogleLogo.astro";
+import { icac } from "~/data/icac";
+import { offer, bookUrl, perks, plans, steps, reviews, faqs } from "~/data/carePlan";
+
+const title = "Fall Tune-Up $59 With Any Care Plan | I Care Air Care";
+const description =
+  "Join a Care Plan and your fall tune-up is $59 (regular $169). Bronze, Silver and Gold plans from I Care Air Care, family-run in Wesley Chapel since 2010.";
+const img = "/images/care-plan";
+const hero = `${img}/tech-condenser.webp`;
+---
+
+<LandingLayout title={title} description={description} heroImage={hero}>
+  <div class="bg-white text-[var(--color-cp-body)]">
+    <!-- Header -->
+    <header class="sticky top-0 z-40 border-b border-[var(--color-cp-line)] bg-white/95 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+        <img src={`${img}/logo.png`} alt="I Care Air Care Heating and Cooling" width="150" height="53" class="h-10 w-auto sm:h-12" />
+        <div class="flex items-center gap-3">
+          <a href={icac.phoneHref} class="hidden items-center gap-2 text-sm font-semibold text-[var(--color-cp-navy)] sm:flex">
+            <Icon name="phone" class="h-4 w-4 text-[var(--color-cp-teal)]" />
+            {icac.phone}
+          </a>
+          <a href="#claim" class="pop-btn rounded-full bg-[var(--color-cp-orange)] px-5 py-2.5 text-sm font-bold text-white hover:bg-[var(--color-cp-orange-dark)]">
+            Claim $59 tune-up
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-br from-[var(--color-cp-navy)] via-[var(--color-cp-navy-deep)] to-[var(--color-cp-teal)] text-white">
+      <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-12 sm:py-16 lg:grid-cols-[1.05fr_1fr] lg:py-20">
+        <div>
+          <p class="text-xs font-bold tracking-[0.25em] text-[var(--color-cp-teal-soft)] uppercase">Fall tune-up season</p>
+          <h1 class="mt-4 text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-[3.4rem]">
+            Your fall tune-up is <span class="text-[var(--color-cp-orange-light)]">{offer.price}</span> with any Care Plan.
+          </h1>
+          <p class="mt-5 max-w-xl text-lg leading-relaxed text-white/85">
+            Regular price {offer.regular}. Join a Care Plan and get two visits a year, priority service and 15% off repairs.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#claim" class="pop-btn inline-flex items-center justify-center rounded-full bg-[var(--color-cp-orange)] px-8 py-4 text-base font-bold text-white hover:bg-[var(--color-cp-orange-dark)]">
+              Claim my $59 tune-up
+            </a>
+            <a href={icac.phoneHref} class="pop-btn inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-8 py-4 text-base font-bold text-white hover:bg-white/20">
+              <Icon name="phone" class="h-5 w-5" /> Call {icac.phone}
+            </a>
+          </div>
+          <a href="#reviews" class="mt-8 inline-flex items-center gap-3 rounded-full bg-white/10 py-2 pr-4 pl-2 text-sm ring-1 ring-white/15">
+            <span class="grid h-8 w-8 place-items-center rounded-full bg-white"><GoogleLogo class="h-4 w-4" /></span>
+            <span class="flex text-[var(--color-cp-orange-light)]">
+              {[1, 2, 3, 4, 5].map(() => <Icon name="star" class="h-4 w-4" />)}
+            </span>
+            <span><b>4.9</b> from 700+ reviews · Family-run since 2010</span>
+          </a>
+        </div>
+        <div class="relative">
+          <img
+            src={hero}
+            alt="I Care Air Care technician checking an AC unit with gauges"
+            width="1600"
+            height="1067"
+            fetchpriority="high"
+            class="aspect-[4/3] w-full rounded-3xl object-cover shadow-2xl ring-1 ring-white/10"
+          />
+          <div class="mt-4 flex items-center justify-between gap-4 rounded-2xl bg-white px-5 py-4 text-[var(--color-cp-navy)] shadow-xl lg:absolute lg:-bottom-8 lg:-left-8 lg:mt-0 lg:w-72">
+            <div>
+              <div class="text-xs font-bold tracking-widest text-[var(--color-cp-orange)] uppercase">Member offer</div>
+              <div class="text-sm text-[var(--color-cp-muted)]">Today's tune-up</div>
+            </div>
+            <div class="text-right">
+              <div class="text-3xl font-extrabold">{offer.price}</div>
+              <div class="text-xs text-[var(--color-cp-muted)] line-through">{offer.regular}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perks -->
+    <section class="border-b border-[var(--color-cp-line)]">
+      <div class="mx-auto grid max-w-5xl gap-8 px-4 py-14 sm:grid-cols-3 sm:py-16">
+        {perks.map((p) => (
+          <div class="text-center">
+            <div class="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[var(--color-cp-tint)] text-xl font-extrabold text-[var(--color-cp-teal)]">{p.stat}</div>
+            <h3 class="mt-4 text-lg font-bold text-[var(--color-cp-navy)]">{p.title}</h3>
+            <p class="mt-1 text-[var(--color-cp-muted)]">{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Plans -->
+    <section id="plans" class="bg-[var(--color-cp-tint)]">
+      <div class="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+        <div class="text-center">
+          <p class="text-xs font-bold tracking-[0.25em] text-[var(--color-cp-orange)] uppercase">Care Plans</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-[var(--color-cp-navy)] sm:text-4xl">Pick the plan that fits your home</h2>
+          <p class="mt-3 text-[var(--color-cp-muted)]">Simple, fixed pricing. No surprises.</p>
+        </div>
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          {plans.map((p) => (
+            <div
+              class={`relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm ${p.badge ? "ring-2 md:-my-3 md:shadow-xl" : "ring-1 ring-[var(--color-cp-line)]"}`}
+              style={p.badge ? `--tw-ring-color:${p.color}` : ""}
+            >
+              <div class="h-1.5" style={`background:${p.color}`}></div>
+              <div class="flex flex-1 flex-col p-7">
+                <div class="flex h-6 items-center justify-center">
+                  {p.badge && (
+                    <span class="rounded-full bg-[var(--color-cp-orange)] px-3 py-1 text-[11px] font-bold tracking-widest text-white uppercase">{p.badge}</span>
+                  )}
+                </div>
+                <div class="mt-3 text-center">
+                  <div class="text-sm font-bold tracking-[0.3em] uppercase" style={`color:${p.color}`}>{p.name}</div>
+                  <div class="mt-2 text-5xl font-extrabold text-[var(--color-cp-navy)]">{p.price}</div>
+                  <div class="mt-1 text-sm text-[var(--color-cp-muted)]">{p.per}</div>
+                  <div class="h-5 text-sm text-[var(--color-cp-muted)]">{p.perNote && `(${p.perNote})`}</div>
+                </div>
+                <ul class="mt-6 flex-1 space-y-3 border-t border-[var(--color-cp-line)] pt-6">
+                  {p.items.map((i) => (
+                    <li class="flex gap-3 text-[15px] text-[var(--color-cp-navy)]">
+                      <span style={`color:${p.color}`}><Icon name="check" class="mt-0.5 h-5 w-5 shrink-0" /></span>
+                      {i}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="#claim"
+                  data-plan={p.id}
+                  class={`pop-btn mt-7 block rounded-full px-6 py-3.5 text-center font-bold ${p.badge ? "bg-[var(--color-cp-orange)] text-white hover:bg-[var(--color-cp-orange-dark)]" : "bg-[var(--color-cp-navy)] text-white hover:bg-[var(--color-cp-teal)]"}`}
+                >
+                  Choose {p.name}
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p class="mx-auto mt-8 max-w-2xl text-center text-sm text-[var(--color-cp-muted)]">{offer.finePrint}</p>
+      </div>
+    </section>
+
+    <!-- Offer + form -->
+    <section id="claim" class="scroll-mt-20">
+      <div class="mx-auto grid max-w-6xl items-start gap-10 px-4 py-16 sm:py-20 lg:grid-cols-2">
+        <div>
+          <p class="text-xs font-bold tracking-[0.25em] text-[var(--color-cp-orange)] uppercase">Claim your tune-up</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-[var(--color-cp-navy)] sm:text-4xl">How it works</h2>
+          <ol class="mt-8 space-y-6">
+            {steps.map((s, i) => (
+              <li class="flex gap-4">
+                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--color-cp-navy)] font-bold text-white">{i + 1}</span>
+                <div>
+                  <h3 class="font-bold text-[var(--color-cp-navy)]">{s.title}</h3>
+                  <p class="mt-1">{s.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <img
+            src={`${img}/tech-tuneup.webp`}
+            alt="I Care Air Care technician servicing an outdoor AC unit"
+            width="1200"
+            height="800"
+            loading="lazy"
+            decoding="async"
+            class="mt-10 hidden aspect-[3/2] w-full rounded-2xl object-cover lg:block"
+          />
+        </div>
+
+        <form id="care-plan-form" class="rounded-3xl bg-white p-6 shadow-2xl ring-1 ring-[var(--color-cp-line)] sm:p-8" novalidate>
+          <div class="rounded-2xl bg-gradient-to-br from-[var(--color-cp-navy)] to-[var(--color-cp-teal)] px-6 py-5 text-center text-white">
+            <div class="text-xs font-bold tracking-[0.25em] text-[var(--color-cp-teal-soft)] uppercase">Care Plan member offer</div>
+            <div class="mt-1 flex flex-col items-center sm:flex-row sm:items-baseline sm:justify-center sm:gap-3">
+              <span class="text-5xl font-extrabold text-[var(--color-cp-orange-light)]">{offer.price}</span>
+              <span class="whitespace-nowrap text-white/75">tune-up · regular <s>{offer.regular}</s></span>
+            </div>
+          </div>
+          <p class="mt-5 text-center text-sm text-[var(--color-cp-muted)]">Send this and we'll call you to book.</p>
+
+          <fieldset class="mt-5">
+            <legend class="mb-2 text-xs font-semibold text-[var(--color-cp-navy)]">Which plan?</legend>
+            <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {[...plans.map((p) => ({ id: p.id, label: p.name })), { id: "not-sure", label: "Not sure" }].map((o, i) => (
+                <label class="cursor-pointer">
+                  <input type="radio" name="plan" value={o.id} class="peer sr-only" checked={i === 0} />
+                  <span class="block rounded-xl border border-[var(--color-cp-line)] px-3 py-2.5 text-center text-sm font-semibold text-[var(--color-cp-navy)] peer-checked:border-[var(--color-cp-orange)] peer-checked:bg-[var(--color-cp-orange-soft)] peer-checked:text-[var(--color-cp-orange-dark)] peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--color-cp-orange)]">
+                    {o.label}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            <div class="sm:col-span-2">
+              <label for="cp-name" class="mb-1 block text-xs font-semibold text-[var(--color-cp-navy)]">Full name</label>
+              <input id="cp-name" name="full_name" required autocomplete="name" placeholder="Jane Doe" class="cp-input" />
+            </div>
+            <div>
+              <label for="cp-phone" class="mb-1 block text-xs font-semibold text-[var(--color-cp-navy)]">Phone <span class="text-[var(--color-cp-orange)]">*</span></label>
+              <input id="cp-phone" type="tel" name="phone" required autocomplete="tel" placeholder="(813) 000-0000" class="cp-input" />
+            </div>
+            <div>
+              <label for="cp-email" class="mb-1 block text-xs font-semibold text-[var(--color-cp-navy)]">Email</label>
+              <input id="cp-email" type="email" name="email" autocomplete="email" placeholder="you@email.com" class="cp-input" />
+            </div>
+          </div>
+          <!-- Honeypot: real people never see or fill this. -->
+          <div class="absolute -left-[9999px]" aria-hidden="true">
+            <label>Company <input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+          </div>
+
+          <button type="submit" class="pop-btn pop-btn--primary mt-6 w-full rounded-full bg-[var(--color-cp-orange)] px-6 py-4 text-base font-bold text-white hover:bg-[var(--color-cp-orange-dark)]">
+            Claim my $59 tune-up
+          </button>
+          <p class="form-msg mt-3 hidden rounded-xl bg-red-50 p-3 text-center text-sm text-red-800"></p>
+          <p class="mt-4 text-center text-sm">
+            Rather talk? Call <a href={icac.phoneHref} class="font-bold text-[var(--color-cp-teal)]">{icac.phone}</a>
+            or <a href={bookUrl} class="font-bold text-[var(--color-cp-teal)] underline-offset-2 hover:underline">book online</a>.
+          </p>
+          <p class="mt-3 text-center text-xs text-[var(--color-cp-muted)]">By sending this, you agree to be contacted about your tune-up and Care Plan.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section id="reviews" class="bg-[var(--color-cp-orange-soft)]">
+      <div class="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+        <div class="text-center">
+          <div class="flex justify-center text-[var(--color-cp-orange)]">
+            {[1, 2, 3, 4, 5].map(() => <Icon name="star" class="h-6 w-6" />)}
+          </div>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-[var(--color-cp-navy)] sm:text-4xl">4.9 stars from 700+ Google reviews</h2>
+          <p class="mt-2 text-[var(--color-cp-muted)]">Family-run in Wesley Chapel since 2010</p>
+        </div>
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+          {reviews.map((r) => (
+            <figure class="rounded-2xl bg-white p-6 shadow-sm">
+              <div class="flex text-[var(--color-cp-orange)]">
+                {[1, 2, 3, 4, 5].map(() => <Icon name="star" class="h-4 w-4" />)}
+              </div>
+              <blockquote class="mt-3 leading-relaxed text-[var(--color-cp-navy)]">"{r.text}"</blockquote>
+              <figcaption class="mt-4 flex items-center gap-2 text-sm font-semibold text-[var(--color-cp-muted)]">
+                <GoogleLogo class="h-4 w-4" /> {r.name}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Team + Tim -->
+    <section>
+      <img src={`${img}/team-vans.webp`} alt="The I Care Air Care team in front of their service vans" width="1400" height="933" loading="lazy" decoding="async" class="h-72 w-full object-cover sm:h-[28rem]" />
+      <div class="mx-auto max-w-3xl px-4 py-14 sm:py-16">
+        <div class="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:text-left">
+          <img src={`${img}/tim-hawk.webp`} alt="Tim Hawk, owner of I Care Air Care" width="320" height="320" loading="lazy" decoding="async" class="h-24 w-24 shrink-0 rounded-full object-cover ring-4 ring-[var(--color-cp-tint)]" />
+          <div>
+            <p class="text-lg leading-relaxed text-[var(--color-cp-body)]">
+              Thank you for trusting us with your home. If anything with your system feels off this season, give us a call. We'd love to see you again.
+            </p>
+            <p class="mt-4 font-bold text-[var(--color-cp-navy)]">Tim Hawk</p>
+            <p class="text-sm text-[var(--color-cp-muted)]">Owner, I Care Air Care</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="bg-[var(--color-cp-tint)]">
+      <div class="mx-auto max-w-3xl px-4 py-16 sm:py-20">
+        <h2 class="text-center text-3xl font-extrabold tracking-tight text-[var(--color-cp-navy)]">Questions</h2>
+        <div class="mt-8 space-y-3">
+          {faqs.map((f) => (
+            <details class="group rounded-2xl bg-white px-6 py-5 shadow-sm">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-[var(--color-cp-navy)]">
+                {f.q}
+                <Icon name="chevron-down" class="h-5 w-5 shrink-0 text-[var(--color-cp-teal)] transition group-open:rotate-180" />
+              </summary>
+              <p class="mt-3 leading-relaxed">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA + footer -->
+    <section class="bg-gradient-to-br from-[var(--color-cp-navy)] via-[var(--color-cp-navy-deep)] to-[var(--color-cp-teal)] pb-28 text-white sm:pb-10">
+      <div class="mx-auto max-w-3xl px-4 py-16 text-center sm:py-20">
+        <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Get on the schedule before the cold nights.</h2>
+        <p class="mt-3 text-white/80">{offer.price} tune-up with any Care Plan. Regular {offer.regular}.</p>
+        <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <a href="#claim" class="pop-btn rounded-full bg-[var(--color-cp-orange)] px-8 py-4 font-bold text-white hover:bg-[var(--color-cp-orange-dark)]">Claim my $59 tune-up</a>
+          <a href={icac.phoneHref} class="pop-btn rounded-full border border-white/30 bg-white/10 px-8 py-4 font-bold text-white hover:bg-white/20">Call {icac.phone}</a>
+        </div>
+      </div>
+      <footer class="mx-auto max-w-6xl border-t border-white/10 px-4 pt-8 text-center text-xs leading-6 text-white/60">
+        I Care Air Care Heating and Cooling · 27022 Foamflower Blvd, Wesley Chapel, FL 33544<br />
+        {icac.phone} · FL Lic. CAC1816515 · © {new Date().getFullYear()} I Care Air Care
+      </footer>
+    </section>
+
+    <!-- Mobile sticky CTA -->
+    <div class="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 gap-2 border-t border-[var(--color-cp-line)] bg-white p-3 shadow-[0_-4px_20px_rgba(20,38,59,0.12)] sm:hidden">
+      <a href={icac.phoneHref} class="pop-btn flex items-center justify-center gap-2 rounded-full bg-[var(--color-cp-navy)] py-3.5 font-bold text-white">
+        <Icon name="phone" class="h-4 w-4" /> Call
+      </a>
+      <a href="#claim" class="pop-btn rounded-full bg-[var(--color-cp-orange)] py-3.5 text-center font-bold text-white">Claim $59</a>
+    </div>
+  </div>
+</LandingLayout>
+
+<style>
+  .cp-input {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-cp-line);
+    background: #fff;
+    padding: 0.7rem 0.85rem;
+    font-size: 1rem;
+    color: var(--color-cp-navy);
+  }
+  .cp-input::placeholder { color: #9aa8b5; }
+  .cp-input:focus {
+    outline: none;
+    border-color: var(--color-cp-teal-mid);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-cp-teal-mid) 25%, transparent);
+  }
+</style>
+
+<script>
+  // Same LeadConnector webhook as the PPC form; form_id "care-plan" lets the
+  // GHL workflow tell the two apart. Redirects to /thank-you on success.
+  const WEBHOOK_URL =
+    "https://services.leadconnectorhq.com/hooks/9z6AJkL0xkPy2TPVG0J3/webhook-trigger/b55c79f0-5a52-4a0e-be27-d5080429daa1";
+  const form = document.getElementById("care-plan-form") as HTMLFormElement | null;
+
+  // "Choose Gold" etc. preselect the plan in the form.
+  document.querySelectorAll<HTMLAnchorElement>("a[data-plan]").forEach((a) => {
+    a.addEventListener("click", () => {
+      const r = form?.querySelector<HTMLInputElement>(`input[name=plan][value="${a.dataset.plan}"]`);
+      if (r) r.checked = true;
+    });
+  });
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const msg = form.querySelector<HTMLElement>(".form-msg")!;
+    const btn = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+    const data: Record<string, string> = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    msg.classList.add("hidden");
+
+    if (data.company) return; // bot
+    const digits = (data.phone || "").replace(/\D/g, "");
+    if (!data.full_name?.trim() || digits.length < 10) {
+      msg.textContent = "Please add your name and a 10-digit phone number.";
+      msg.classList.remove("hidden");
+      return;
+    }
+    delete data.company;
+
+    const params = new URLSearchParams(location.search);
+    ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "fbclid"].forEach((k) => {
+      const v = params.get(k);
+      if (v) data[k] = v;
+    });
+    data.service = "care-plan-tune-up";
+    data.message = `Care Plan: ${data.plan}. $59 tune-up offer.`;
+    data.page_url = location.href;
+    data.referrer = document.referrer;
+    data.form_id = "care-plan";
+
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({ event: "lead_form_submit", form_id: "care-plan", plan: data.plan });
+      location.href = "/thank-you";
+    } catch {
+      btn.disabled = false;
+      btn.textContent = "Claim my $59 tune-up";
+      msg.innerHTML = 'Couldn\'t send. Please call <a href="tel:+18133952324" class="font-bold underline">(813) 395-2324</a>.';
+      msg.classList.remove("hidden");
+    }
+  });
+</script>

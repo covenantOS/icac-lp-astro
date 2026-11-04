@@ -62,3 +62,24 @@ body {
 .pop-btn--secondary.is-pressed {
   background-color: #fafafa;
 }
+
+/* Care Plan page palette: matches icareaircare.com and the Care Plan emails
+   (navy + deep teal + burnt orange). Used only by /care-plan. */
+@theme {
+  --color-cp-navy: #1a2e45;
+  --color-cp-navy-deep: #14263b;
+  --color-cp-teal: #2a5e6d;
+  --color-cp-teal-mid: #397d90;
+  --color-cp-teal-soft: #9fd0de;
+  --color-cp-tint: #eef5f8;
+  --color-cp-line: #d7e3ea;
+  --color-cp-orange: #d0761f;
+  --color-cp-orange-dark: #a65c18;
+  --color-cp-orange-light: #ffb066;
+  --color-cp-orange-soft: #fef5ea;
+  --color-cp-body: #3a4d60;
+  --color-cp-muted: #6b7a8a;
+  --color-cp-bronze: #a3653a;
+  --color-cp-silver: #6f7f8e;
+  --color-cp-gold: #b8892a;
+}
