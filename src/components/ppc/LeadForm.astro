@@ -1,0 +1,120 @@
+---
+// Callback form for the Spectrum PPC page. Posts JSON to the same
+// LeadConnector (GHL) webhook as QuoteForm, then redirects to /thank-you.
+// Adds a honeypot field and a lead_source so GHL can tell PPC leads apart.
+import { biz } from "~/data/ppc";
+
+interface Props {
+  formId: string;
+  title?: string;
+  subtitle?: string;
+}
+const {
+  formId,
+  title = "Request a callback",
+  subtitle = "Our Wesley Chapel office calls you back during business hours.",
+} = Astro.props;
+
+const field =
+  "w-full rounded-lg border border-[var(--color-line)] bg-white px-3.5 py-3 text-base text-[var(--color-ink)] placeholder:text-slate-400 focus:border-[var(--color-brand)] focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/25";
+const label = "mb-1.5 block text-[13px] font-semibold text-[var(--color-ink)]";
+---
+
+<form id={formId} class="ppc-form relative rounded-2xl bg-white p-6 text-left shadow-[0_24px_60px_-20px_rgb(15_26_41/0.45)] ring-1 ring-black/5 sm:p-7" method="post" action="#" novalidate>
+  <p class="text-xl font-bold text-[var(--color-navy)]">{title}</p>
+  <p class="mt-1 text-sm text-[var(--color-ink-soft)]">{subtitle}</p>
+
+  <div class="mt-5 space-y-4">
+    <div>
+      <label class={label} for={`${formId}-name`}>Name</label>
+      <input id={`${formId}-name`} name="full_name" required autocomplete="name" placeholder="Your name" class={field} />
+    </div>
+    <div>
+      <label class={label} for={`${formId}-phone`}>Phone</label>
+      <input id={`${formId}-phone`} type="tel" name="phone" required autocomplete="tel" inputmode="tel" placeholder="(813) 000-0000" class={field} />
+    </div>
+    <div>
+      <label class={label} for={`${formId}-service`}>What do you need?</label>
+      <select id={`${formId}-service`} name="service" class={field}>
+        <option value="ac-repair">AC repair</option>
+        <option value="no-cool-emergency">AC not cooling at all</option>
+        <option value="ac-maintenance">Tune-up / maintenance</option>
+        <option value="ac-installation">New AC / replacement</option>
+        <option value="heating">Heating / heat pump</option>
+        <option value="air-duct-cleaning">Duct cleaning / air quality</option>
+        <option value="other">Something else</option>
+      </select>
+    </div>
+    <div>
+      <label class={label} for={`${formId}-message`}>Anything we should know? <span class="font-normal text-slate-400">(optional)</span></label>
+      <textarea id={`${formId}-message`} name="message" rows="2" placeholder="Blowing warm air, water leak, system age..." class={field}></textarea>
+    </div>
+    <!-- Honeypot: people never see this field; bots fill it in. -->
+    <div class="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+      <label for={`${formId}-company`}>Company</label>
+      <input id={`${formId}-company`} name="company_website" tabindex="-1" autocomplete="off" />
+    </div>
+  </div>
+
+  <button type="submit" class="pop-btn pop-btn--primary mt-5 w-full rounded-lg bg-[var(--color-accent)] px-4 py-3.5 text-base font-bold text-white hover:bg-[var(--color-accent-dark)]">
+    Call me back
+  </button>
+  <p class="mt-3 text-center text-xs text-slate-500">
+    Rather talk now? <a href={biz.phoneHref} class="font-semibold text-[var(--color-brand-dark)] underline">Call {biz.phone}</a>
+  </p>
+  <p class="mt-2 text-center text-[11px] leading-snug text-slate-400">
+    By submitting, you agree that I Care Air Care may contact you about your request by phone or text.
+  </p>
+  <div class="form-error mt-4 hidden rounded-lg bg-red-50 p-3 text-center text-sm text-red-800 ring-1 ring-red-200">
+    That didn't go through. Please call <a href={biz.phoneHref} class="font-bold underline">{biz.phone}</a> and we'll get you scheduled.
+  </div>
+</form>
+
+<script define:vars={{ formId }}>
+  const WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/9z6AJkL0xkPy2TPVG0J3/webhook-trigger/b55c79f0-5a52-4a0e-be27-d5080429daa1";
+  const form = document.getElementById(formId);
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector("button[type=submit]");
+      const errorBox = form.querySelector(".form-error");
+      errorBox?.classList.add("hidden");
+      if (!form.reportValidity()) return;
+
+      const data = Object.fromEntries(new FormData(form));
+      // Bots fill the honeypot. Pretend it worked and send nothing.
+      if (data.company_website) { window.location.href = "/thank-you"; return; }
+      delete data.company_website;
+
+      btn?.setAttribute("disabled", "true");
+      if (btn) btn.textContent = "Sending...";
+
+      const params = new URLSearchParams(window.location.search);
+      ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "fbclid"].forEach((k) => {
+        const v = params.get(k);
+        if (v) data[k] = v;
+      });
+      data.lead_source = "Spectrum PPC landing page";
+      data.page_url = window.location.href;
+      data.referrer = document.referrer || "";
+      data.form_id = formId;
+
+      try {
+        const res = await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error(`webhook ${res.status}`);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: "lead_form_submit", form_id: formId });
+        window.location.href = "/thank-you";
+      } catch (err) {
+        console.error("[icac-lp] form submit failed", err);
+        btn?.removeAttribute("disabled");
+        if (btn) btn.textContent = "Call me back";
+        errorBox?.classList.remove("hidden");
+      }
+    });
+  }
+</script>

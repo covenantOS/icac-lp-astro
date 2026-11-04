@@ -4,16 +4,21 @@
 @theme {
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 
-  /* Brand palette — teal primary + orange accent (sampled from ICAC's logo + site) */
-  --color-brand: #1ea7b8;          /* mid teal — buttons, accents */
-  --color-brand-dark: #15788a;     /* darker teal — headlines */
-  --color-brand-darker: #0e4f5b;   /* deepest teal — nav, footer, hero overlay */
-  --color-brand-light: #e6f5f7;    /* very light teal tint — section bg */
-  --color-brand-lighter: #f3fafb;  /* near-white tint */
-  --color-accent: #f5953c;         /* orange — primary CTA buttons */
-  --color-accent-dark: #d97a20;    /* darker orange — hover */
-  --color-ink: #0f172a;            /* slate-900 body text */
-  --color-ink-soft: #475569;       /* slate-600 secondary text */
+  /* Brand palette, matched to icareaircare.com (navy + deep teal + orange).
+     The old teal token names are kept so every page picks up the new colors. */
+  --color-brand: #397d90;          /* teal 700: links, icons */
+  --color-brand-dark: #2a5e6d;     /* teal 800: eyebrows, accents */
+  --color-brand-darker: #1a2e45;   /* navy 700: headings, dark bands */
+  --color-brand-light: #e6eff3;    /* surface 2 */
+  --color-brand-lighter: #f0f5f8;  /* surface */
+  --color-navy: #1a2e45;
+  --color-navy-deep: #0f1a29;
+  --color-accent: #e88a38;         /* orange: primary CTA */
+  --color-accent-dark: #d0761f;    /* orange hover */
+  --color-accent-light: #f3a35a;   /* orange on dark backgrounds */
+  --color-line: #d7e3ea;
+  --color-ink: #1a2e45;
+  --color-ink-soft: #3f5672;
 }
 
 html {
