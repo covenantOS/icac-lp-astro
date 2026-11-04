@@ -47,32 +47,33 @@ public/
 
 ## Editing content
 
-99% of copy lives in `src/data/icac.ts`. To change a service blurb, the
-phone number, ZIP list, reviews, or FAQs — edit that file. Components
-read from it; no hard-coded strings in the section files.
+The main page (`src/pages/index.astro`, the Spectrum PPC page) reads its copy
+from `src/data/ppc.ts`. Every fact there matches icareaircare.com; check the
+website before changing numbers, and never add offers, prices or "free
+estimate" claims without Daniel's OK. Photos in `public/images/real/` come from
+the real ICAC photo shoot. `src/data/icac.ts` still feeds the older section
+components used by /thank-you.
 
 ## Form / webhook
 
-`QuoteForm.astro` currently prevents default on submit and shows a
-thank-you state. The submit handler logs the payload to `console.log`.
-
-To wire it to a real backend, replace the body of the form `submit`
-listener at the bottom of `QuoteForm.astro` with a `fetch()` POST to
-your webhook (e.g. GHL, Zapier, Cloudflare Worker).
+`src/components/ppc/LeadForm.astro` posts JSON to the LeadConnector (GHL)
+webhook with UTMs, `lead_source`, page URL and form id, then redirects to
+`/thank-you`. A hidden honeypot field drops bot submissions. Call buttons carry
+`data-call="<location>"` and push a `call_click` dataLayer event.
 
 ## Brand
 
-Tokens defined in `src/styles/global.css`:
+Matched to icareaircare.com, tokens in `src/styles/global.css`:
 
 | Token | Hex | Use |
 | --- | --- | --- |
-| `--color-brand` | `#1ea7b8` | mid teal, buttons, links |
-| `--color-brand-dark` | `#15788a` | headlines |
-| `--color-brand-darker` | `#0e4f5b` | nav, footer, hero overlay |
-| `--color-brand-light` | `#e6f5f7` | section bg |
-| `--color-brand-lighter` | `#f3fafb` | near-white tint |
-| `--color-accent` | `#f5953c` | orange — primary CTA |
-| `--color-accent-dark` | `#d97a20` | hover |
+| `--color-navy` / `--color-brand-darker` | `#1a2e45` | headings, dark bands |
+| `--color-navy-deep` | `#0f1a29` | hero, footer |
+| `--color-brand-dark` | `#2a5e6d` | eyebrows |
+| `--color-brand` | `#397d90` | icons, links |
+| `--color-brand-lighter` | `#f0f5f8` | section background |
+| `--color-accent` | `#e88a38` | orange call buttons |
+| `--color-accent-dark` | `#d0761f` | hover |
 
 ## Tracking
 
